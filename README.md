@@ -1,18 +1,35 @@
-# DinghtQAQ Pure-live
+# dinghtQAQ/pure-live
 
-## How do I install these formulae?
+Homebrew cask for [纯粹直播 / Pure Live](https://github.com/liuchuancong/pure_live).
 
-`brew install dinghtqaq/pure-live/<formula>`
+The upstream macOS archive name includes a build number that is not part of the Git tag. This tap tracks the latest GitHub release and rewrites the cask, so a normal `brew upgrade` can install it.
 
-Or `brew tap dinghtqaq/pure-live` and then `brew install <formula>`.
+## Install
 
-Or, in a `brew bundle` `Brewfile`:
-
-```ruby
-tap "dinghtqaq/pure-live"
-brew "<formula>"
+```sh
+brew tap dinghtqaq/pure-live
+brew install --cask pure-live
 ```
 
-## Documentation
+Homebrew 4.6 and later refuses to load a third-party tap until you trust it:
 
-`brew help`, `man brew` or check [Homebrew's documentation](https://docs.brew.sh).
+```sh
+brew trust dinghtqaq/pure-live
+```
+
+If `/Applications/纯粹直播.app` was installed by hand, install with `--force` so Homebrew can replace it:
+
+```sh
+brew install --cask --force pure-live
+```
+
+## Update
+
+```sh
+brew update
+brew upgrade --cask pure-live
+```
+
+A scheduled workflow checks the upstream release every hour and commits a new cask version when one is published. After `brew update`, `brew upgrade --cask pure-live` replaces the app.
+
+The current package is ad-hoc signed. macOS may ask you to allow it in System Settings → Privacy & Security the first time it opens.

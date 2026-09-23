@@ -1,0 +1,33 @@
+name: Update pure-live cask
+
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out tap
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Update cask from the latest GitHub release
+        run: python3 .github/scripts/update_cask.py
+
+      - name: Commit and push when the release changed
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Casks/pure-live.rb
+          if git diff --cached --quiet; then
+            echo "cask already matches the latest release"
+            exit 0
+          fi
+          version=$(ruby -e 'print File.read("Casks/pure-live.rb")[/version "([^"]+)"/, 1]')
+          git commit -m "pure-live ${version}"
+          git push
