@@ -1,6 +1,6 @@
 cask "pure-live" do
-  version "3.1.18,4107"
-  sha256 "972f786ab8bcda05c8901da03da5da4bc68afbdf587eab81880d47575672ca7d"
+  version "3.1.19,4108"
+  sha256 "f2451949832157e8396362c6b4de2fea6e59bc16da0721ef09f10b9c40a43c3c"
 
   url "https://github.com/liuchuancong/pure_live/releases/download/v#{version.csv.first}/PureLive-#{version.csv.first}-#{version.csv.second}-macos-universal.zip"
   name "纯粹直播"
